@@ -1,0 +1,2 @@
+# qiaomu-download
+通用在线视频下载与媒体提取技能。用户提供 YouTube/youtu.be、B站/bilibili/b23.tv、X/Twitter、Vimeo、TikTok、Instagram、Facebook、Twitch、Reddit 或其他 yt-dlp 支持的视频链接，并要求下载/保存视频、提取 audio/MP3、下载字幕、查看视频信息或更新 yt-dlp 时使用。微信视频号 weixin.qq.com/sph 链接转交 qiaomu-wx-video，绝不自动化操作微信客户端。
