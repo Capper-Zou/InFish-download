@@ -1,14 +1,14 @@
-# Creation handoff — qiaomu-download 1.3.0
+# Creation handoff — infish-download 1.3.0
 
 ## Studied skills and sources
 
-The design studied local `qiaomu-youtube-download`, `lwmxiaobei/yt-dlp-skill`, `MapleShaw/yt-dlp-downloader-skill`, `yutto-dev/yutto`, the owned qiaomu-wx-video implementation, spotDL 4.5.2, SpotiFlyer, and the official yt-dlp documentation. Candidate-specific details are recorded in `prior-art-research.md`.
+The design studied local `infish-youtube-download`, `lwmxiaobei/yt-dlp-skill`, `MapleShaw/yt-dlp-downloader-skill`, `yutto-dev/yutto`, the owned infish-wx-video implementation, spotDL 4.5.2, SpotiFlyer, and the official yt-dlp documentation. Candidate-specific details are recorded in `prior-art-research.md`.
 
 ## Retained, rejected, invented
 
 - Retained: official stable updates, quality presets, audio/subtitles/info modes, advisory locks, progress streaming, browser Cookie support and ffprobe verification.
 - Rejected: URL-only auto-download, Cookie-first access, unbounded playlists, raw custom format strings, DRM/access-control bypass and WeChat UI automation.
-- Adapted from qiaomu-wx-video: embedded URL validation, fixed resolvers, local feed capture, signed URL preservation, decrypt, full-decode verification and locked backend installer.
+- Adapted from infish-wx-video: embedded URL validation, fixed resolvers, local feed capture, signed URL preservation, decrypt, full-decode verification and locked backend installer.
 - Invented for this integration: a standalone embedded dispatcher, explicit resolver-consent flag, structured `manual_action_required` / `wechat_setup_required` states, and one JSON contract across yt-dlp and WeChat outputs.
 - Adapted from spotDL: Spotify metadata/audio separation and multi-signal matching. The implementation uses public Spotify page metadata because spotDL's metadata client stalled in the local live probe.
 - Invented for Spotify: dependency-free public metadata extraction, ten-candidate confidence scoring, variant penalties, source disclosure and automatic single-track limits.

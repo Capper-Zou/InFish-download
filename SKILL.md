@@ -1,12 +1,12 @@
 ---
-name: qiaomu-download
+name: infish-download
 description: 通用在线视频与音乐下载、媒体提取技能。用户表达“下载这个/保存这个/download this”等下载意图并附带 HTTPS URL 时，即使没有说“视频”或“音乐”，也用本技能探测并下载。完整内置微信视频号与 Spotify 单曲适配器，并支持 YouTube、B站/Bilibili、X/Twitter、抖音/Douyin、TikTok、小红书/Xiaohongshu、Instagram、Facebook、Vimeo、Twitch、Reddit、微博、AcFun 等 yt-dlp extractor；也用于 MP3、字幕、媒体信息和 yt-dlp 更新。单独粘贴 URL 而没有下载意图时不自动下载。绝不使用 UI 自动化操作微信、小红书或风控验证页面。
 version: 1.3.0
 ---
 
-# Qiaomu Download
+# InFish Download
 
-把用户给出的在线视频 URL 转为经过验证的本地视频、MP3、字幕或结构化媒体信息。默认保存到 `~/Downloads`，除非用户指定目录。微信视频号是本包内置适配器，不依赖另装 `qiaomu-wx-video`。
+把用户给出的在线视频 URL 转为经过验证的本地视频、MP3、字幕或结构化媒体信息。默认保存到 `~/Downloads`，除非用户指定目录。微信视频号是本包内置适配器，不依赖另装 `infish-wx-video`。
 
 ## 工作流
 
@@ -73,4 +73,4 @@ python3 scripts/download.py download 'https://open.spotify.com/track/...' --dir 
 - [安全与隐私](references/security.md)
 - [平台能力](references/platforms.md)
 
-Copyright (c) 向阳乔木 · [X](https://x.com/vista8) · [GitHub](https://github.com/joeseesun/)
+Copyright (c) InFish · [GitHub](https://github.com/Capper-Zou/InFish-download)

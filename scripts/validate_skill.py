@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate qiaomu-download package and governed safety contract."""
+"""Validate infish-download package and governed safety contract."""
 
 import argparse
 import json
@@ -27,7 +27,7 @@ def main() -> None:
     failures = [f"missing: {path}" for path in REQUIRED if not (root / path).is_file()]
     skill = (root / "SKILL.md").read_text(encoding="utf-8") if (root / "SKILL.md").exists() else ""
     script = (root / "scripts/download.py").read_text(encoding="utf-8") if (root / "scripts/download.py").exists() else ""
-    if not skill.startswith("---\n") or "name: qiaomu-download" not in skill:
+    if not skill.startswith("---\n") or "name: infish-download" not in skill:
         failures.append("invalid SKILL.md frontmatter")
     for term in ("Trust boundary", "Rollback boundary", "内置视频号适配器", "Spotify 单曲流程", "不得用 Computer Use", "小红书", "安全验证", "最多一次 Cookie 回退"):
         if term not in skill:
@@ -45,8 +45,21 @@ def main() -> None:
     adapter = (root / "scripts/wechat_adapter.py").read_text(encoding="utf-8") if (root / "scripts/wechat_adapter.py").exists() else ""
     if "ui_automation_used" not in adapter or "explicit_share_url_consent" not in adapter:
         failures.append("wechat adapter missing no-UI or consent contract")
-    if manifest.get("name") != "qiaomu-download" or manifest.get("version") != "1.3.0":
+    if manifest.get("name") != "infish-download" or manifest.get("version") != "1.3.0":
         failures.append("manifest identity mismatch")
+    legacy_terms = ("qia" + "omu", "joe" + "seesun", "vis" + "ta8")
+    legacy_hits = []
+    for path in root.rglob("*"):
+        if not path.is_file() or ".git" in path.parts or "__pycache__" in path.parts:
+            continue
+        try:
+            content = path.read_text(encoding="utf-8").lower()
+        except UnicodeDecodeError:
+            continue
+        if any(term in content for term in legacy_terms):
+            legacy_hits.append(str(path.relative_to(root)))
+    if legacy_hits:
+        failures.append(f"legacy branding present: {sorted(legacy_hits)}")
     spotify = (root / "scripts/spotify_adapter.py").read_text(encoding="utf-8") if (root / "scripts/spotify_adapter.py").exists() else ""
     for term in ("match_confidence", "drm_bypass_used", "spotify_login_used", "ytsearch10"):
         if term not in spotify:

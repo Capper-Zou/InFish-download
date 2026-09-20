@@ -1,6 +1,6 @@
 # 内置视频号适配器
 
-`qiaomu-download` 已把原 `qiaomu-wx-video` 的验证、在线解析、本地 feed 捕获、媒体下载、解密、编码验证和后端安装能力收入同一安装包。实现位于 `scripts/wechat/`，统一入口为 `scripts/download.py`。
+`infish-download` 已把原 `infish-wx-video` 的验证、在线解析、本地 feed 捕获、媒体下载、解密、编码验证和后端安装能力收入同一安装包。实现位于 `scripts/wechat/`，统一入口为 `scripts/download.py`。
 
 ## 快速路径
 
@@ -8,7 +8,7 @@
 python3 scripts/download.py download 'https://weixin.qq.com/sph/...' --dir ~/Downloads
 ```
 
-适配器先运行只读预检。若 `127.0.0.1:2022` 已有本地 API 且 `~/.local/share/qiaomu-wx-video/local-settings.json` 配置了后端、配置文件和 ffmpeg，它会请求 `/api/channels/feed/profile?url=...`。只有内层 `errCode == 0` 且 `media` 非空才算取得媒体。
+适配器先运行只读预检。若 `127.0.0.1:2022` 已有本地 API 且 `~/.local/share/infish-wx-video/local-settings.json` 配置了后端、配置文件和 ffmpeg，它会请求 `/api/channels/feed/profile?url=...`。只有内层 `errCode == 0` 且 `media` 非空才算取得媒体。
 
 页面 socket 未连接时返回 `manual_action_required`。此时由用户手动在电脑微信中重新打开并播放视频，Agent 不操作微信。随后运行：
 

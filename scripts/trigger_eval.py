@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate qiaomu-download trigger fixtures."""
+"""Evaluate infish-download trigger fixtures."""
 
 import argparse
 import json

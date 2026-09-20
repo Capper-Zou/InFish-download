@@ -4,22 +4,22 @@ Research dates: 2026-09-19 and 2026-09-20. Automated discovery produced 72 candi
 
 ## Sources studied
 
-1. **qiaomu-youtube-download 1.2.0 (local)** — mature Qiaomu wrapper with official-release checks, lock inheritance, progress streaming, browser-cookie fallback, output verification and safe fragment cleanup.
+1. **infish-youtube-download 1.2.0 (local)** — mature InFish wrapper with official-release checks, lock inheritance, progress streaming, browser-cookie fallback, output verification and safe fragment cleanup.
 2. **lwmxiaobei/yt-dlp-skill** — broad trigger wording, quality presets, audio formats, URL extraction and multi-platform examples. Its workflow often asks again even when user intent is already clear, and it lacks a post-download media verification contract.
 3. **MapleShaw/yt-dlp-downloader-skill** — concise cross-platform UX, YouTube/Bilibili/X positioning, subtitles and cookie troubleshooting. Its public interface calls raw shell commands and treats Cookie use as a common default rather than a privacy-sensitive fallback.
 4. **yutto-dev/yutto** — Bilibili specialist showing the value of platform-specific depth, including collections, codecs and login-sensitive quality. It is retained as an escalation reference rather than a second runtime dependency.
-5. **qiaomu-wx-video 0.1.2-local (local working tree)** — owned specialist implementation with WeChat URL validation, fixed resolver fallback, local feed capture, signed URL preservation, decrypt, full-decode verification, pinned backend installation and proxy rollback rules.
+5. **infish-wx-video 0.1.2-local (local working tree)** — owned specialist implementation with WeChat URL validation, fixed resolver fallback, local feed capture, signed URL preservation, decrypt, full-decode verification, pinned backend installation and proxy rollback rules.
 6. **yt-dlp official README, installation wiki and FAQ** — authoritative basis for extractor breadth, browser Cookie support, package-manager update routes and the fact that site support must be tested dynamically.
 7. **spotDL/spotify-downloader 4.5.2** — active MIT project with 26k+ GitHub stars. It separates Spotify metadata from YouTube audio, searches by ISRC when available, scores title/artist/album/duration and uses yt-dlp for transfer. Its local metadata request stalled in a real 2026-09-20 probe, so it is retained as algorithmic prior art rather than a runtime dependency.
 8. **Shabinder/SpotiFlyer** — older metadata-to-audio architecture using JioSaavn and YouTube Music fallbacks. The repository states that it is no longer updated, so its provider stack was rejected.
 
 ## Candidate-specific lessons retained
 
-- From qiaomu-youtube-download: official stable update checks, advisory locks, bounded subprocesses, `--no-overwrites`, deterministic filenames and ffprobe verification.
+- From infish-youtube-download: official stable update checks, advisory locks, bounded subprocesses, `--no-overwrites`, deterministic filenames and ffprobe verification.
 - From lwmxiaobei: platform-rich trigger language and simple video/audio/info modes.
 - From MapleShaw: Chinese-first examples for YouTube, Bilibili and X, plus actionable 403 guidance.
 - From yutto: describe Bilibili entitlement and quality limits honestly; keep a specialist escalation path.
-- From qiaomu-wx-video: retain local-first capture, explicit resolver consent, complete signed URLs, real codec verification, one manual user handoff and strict no-WeChat-UI automation.
+- From infish-wx-video: retain local-first capture, explicit resolver consent, complete signed URLs, real codec verification, one manual user handoff and strict no-WeChat-UI automation.
 - From official yt-dlp: make extractor capability dynamic, support `--cookies-from-browser`, and respect installation provenance when updating.
 - From spotDL: separate metadata and audio provenance, use multiple match signals, reject weak matches, and expose the selected public source.
 - From SpotiFlyer: retain the provider-adapter idea, but reject its abandoned unofficial APIs and proxy dependencies.

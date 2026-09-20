@@ -78,10 +78,10 @@ def main() -> None:
     asset = lock["assets"].get(key)
     if not asset:
         raise SystemExit(f"unsupported platform: {key}")
-    install_root = Path(args.install_root or os.environ.get("QIAOMU_WX_VIDEO_HOME", Path.home() / ".local/share/qiaomu-wx-video"))
+    install_root = Path(args.install_root or os.environ.get("INFISH_WX_VIDEO_HOME", Path.home() / ".local/share/infish-wx-video"))
     backend_root = install_root / "backend"
     destination = backend_root / lock["tag"]
-    marker = destination / ".qiaomu-install.json"
+    marker = destination / ".infish-install.json"
     if marker.is_file():
         installed = json.loads(marker.read_text(encoding="utf-8"))
         if installed.get("archive_sha256") == asset["sha256"] and installed.get("platform") == key:
@@ -93,11 +93,11 @@ def main() -> None:
     os.chmod(backend_root, 0o700)
     url = f"https://github.com/{lock['upstream']}/releases/download/{lock['tag']}/{asset['name']}"
 
-    temp_dir = Path(tempfile.mkdtemp(prefix="qiaomu-wx-video-download-"))
+    temp_dir = Path(tempfile.mkdtemp(prefix="infish-wx-video-download-"))
     stage = Path(tempfile.mkdtemp(prefix=f".{lock['tag']}-stage-", dir=backend_root))
     archive = temp_dir / asset["name"]
     try:
-        request = urllib.request.Request(url, headers={"User-Agent": "qiaomu-wx-video/0.1.0"})
+        request = urllib.request.Request(url, headers={"User-Agent": "infish-wx-video/0.1.0"})
         with urllib.request.urlopen(request, timeout=60) as response, archive.open("wb") as output:
             shutil.copyfileobj(response, output)
         actual = sha256(archive)
@@ -108,7 +108,7 @@ def main() -> None:
             if candidate.is_file() and not candidate.name.endswith((".yaml", ".md")):
                 candidate.chmod(candidate.stat().st_mode | 0o700)
         marker_payload = {"tag": lock["tag"], "platform": key, "asset": asset["name"], "archive_sha256": actual, "source": url}
-        (stage / ".qiaomu-install.json").write_text(json.dumps(marker_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        (stage / ".infish-install.json").write_text(json.dumps(marker_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         stage.replace(destination)
         print(json.dumps({"ok": True, "platform": key, "tag": lock["tag"], "install_dir": str(destination), "sha256": actual}, ensure_ascii=False, indent=2))
     finally:

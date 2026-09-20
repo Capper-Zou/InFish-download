@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unit tests for qiaomu-download."""
+"""Unit tests for infish-download."""
 
 import importlib.util
 import json
@@ -11,7 +11,7 @@ from unittest.mock import patch
 SCRIPT_INTERFACE = "internal-module"
 
 MODULE_PATH = Path(__file__).with_name("download.py")
-SPEC = importlib.util.spec_from_file_location("qiaomu_download", MODULE_PATH)
+SPEC = importlib.util.spec_from_file_location("infish_download", MODULE_PATH)
 assert SPEC and SPEC.loader
 download = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(download)

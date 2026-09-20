@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Standalone WeChat Channels adapter bundled with qiaomu-download.
+"""Standalone WeChat Channels adapter bundled with infish-download.
 
 The adapter never controls WeChat or changes system proxy settings. It can use an
 already connected local backend, or a fixed online resolver when the caller has
@@ -50,7 +50,7 @@ def preflight(url: str, timeout: int = 30) -> dict[str, Any]:
 
 
 def local_settings() -> dict[str, Any]:
-    home = Path(os.environ.get("QIAOMU_WX_VIDEO_HOME", Path.home() / ".local/share/qiaomu-wx-video"))
+    home = Path(os.environ.get("INFISH_WX_VIDEO_HOME", Path.home() / ".local/share/infish-wx-video"))
     path = home / "local-settings.json"
     if not path.is_file():
         return {}
@@ -206,7 +206,7 @@ def doctor(url: str | None = None) -> dict[str, Any]:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Bundled WeChat Channels adapter for qiaomu-download")
+    parser = argparse.ArgumentParser(description="Bundled WeChat Channels adapter for infish-download")
     commands = parser.add_subparsers(dest="command", required=True)
     check = commands.add_parser("doctor")
     check.add_argument("--url")

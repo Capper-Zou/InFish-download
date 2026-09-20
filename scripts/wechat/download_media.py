@@ -222,7 +222,7 @@ def download(profile, args):
 
 
 def main():
-    home = Path(os.environ.get('QIAOMU_WX_VIDEO_HOME', Path.home() / '.local/share/qiaomu-wx-video'))
+    home = Path(os.environ.get('INFISH_WX_VIDEO_HOME', Path.home() / '.local/share/infish-wx-video'))
     settings_path = home / 'local-settings.json'
     settings = json.loads(settings_path.read_text()) if settings_path.is_file() else {}
     p = argparse.ArgumentParser(description=__doc__)

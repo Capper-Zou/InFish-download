@@ -7,7 +7,7 @@ import importlib.util
 import sys
 MODULE_DIR = Path(__file__).resolve().parents[1] / "scripts" / "wechat"
 sys.path.insert(0, str(MODULE_DIR))
-SPEC = importlib.util.spec_from_file_location("qiaomu_wechat_media", MODULE_DIR / "download_media.py")
+SPEC = importlib.util.spec_from_file_location("infish_wechat_media", MODULE_DIR / "download_media.py")
 assert SPEC and SPEC.loader
 dm = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(dm)

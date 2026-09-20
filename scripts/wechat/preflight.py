@@ -44,13 +44,13 @@ def platform_key() -> str:
 
 def backend_candidates() -> list[str]:
     values: list[str] = []
-    configured = os.environ.get("QIAOMU_WX_VIDEO_BACKEND")
+    configured = os.environ.get("INFISH_WX_VIDEO_BACKEND")
     if configured:
         values.append(configured)
     found = shutil.which("wx_video_download")
     if found:
         values.append(found)
-    home = Path(os.environ.get("QIAOMU_WX_VIDEO_HOME", Path.home() / ".local/share/qiaomu-wx-video"))
+    home = Path(os.environ.get("INFISH_WX_VIDEO_HOME", Path.home() / ".local/share/infish-wx-video"))
     for name in ("wx_video_download", "wx_video_download.exe"):
         for path in home.glob(f"backend/*/{name}"):
             values.append(str(path))
@@ -58,7 +58,7 @@ def backend_candidates() -> list[str]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Read-only preflight for qiaomu-wx-video.")
+    parser = argparse.ArgumentParser(description="Read-only preflight for infish-wx-video.")
     parser.add_argument("--url", required=True, help="WeChat Channels share URL")
     args = parser.parse_args()
     try:

@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "wechat_adapter.py"
-SPEC = importlib.util.spec_from_file_location("qiaomu_wechat_adapter", MODULE_PATH)
+SPEC = importlib.util.spec_from_file_location("infish_wechat_adapter", MODULE_PATH)
 assert SPEC and SPEC.loader
 adapter = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(adapter)

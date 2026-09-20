@@ -71,7 +71,7 @@ def normalize_track_url(raw: str) -> tuple[str, str]:
 
 
 def tool(name: str) -> str:
-    found = os.environ.get(f"QIAOMU_{name.upper().replace('-', '_')}_BIN") or shutil.which(name)
+    found = os.environ.get(f"INFISH_{name.upper().replace('-', '_')}_BIN") or shutil.which(name)
     if not found or not Path(found).expanduser().is_file():
         raise AdapterError("dependency", f"{name} not found")
     return str(Path(found).expanduser())
@@ -84,7 +84,7 @@ def error_text(result: subprocess.CompletedProcess[str]) -> str:
 
 def fetch_metadata(url: str, timeout: int) -> dict[str, Any]:
     request = urllib.request.Request(url, headers={
-        "User-Agent": "Mozilla/5.0 qiaomu-download/1.3.0", "Accept-Language": "en-US,en;q=0.8"})
+        "User-Agent": "Mozilla/5.0 infish-download/1.3.0", "Accept-Language": "en-US,en;q=0.8"})
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             page = response.read(2_000_000).decode("utf-8", "replace")
@@ -167,7 +167,7 @@ def filename(value: str) -> str:
 
 
 def apply_tags(path: Path, track: dict[str, Any], timeout: int) -> bool:
-    with tempfile.TemporaryDirectory(prefix="qiaomu-spotify-tags-") as temp:
+    with tempfile.TemporaryDirectory(prefix="infish-spotify-tags-") as temp:
         tagged = Path(temp) / "tagged.mp3"
         command = [tool("ffmpeg"), "-v", "error", "-i", str(path), "-map", "0:a:0", "-c:a", "copy",
                    "-id3v2_version", "3", "-metadata", f"title={track['title']}",
@@ -201,7 +201,7 @@ def probe(path: Path) -> dict[str, Any]:
 
 @contextmanager
 def track_lock(output_dir: Path, track_id: str) -> Iterator[None]:
-    lock_dir = Path(tempfile.gettempdir()) / "qiaomu-download-locks"
+    lock_dir = Path(tempfile.gettempdir()) / "infish-download-locks"
     lock_dir.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256(f"spotify|{output_dir}|{track_id}".encode()).hexdigest()
     handle = (lock_dir / f"{digest}.lock").open("a+b")

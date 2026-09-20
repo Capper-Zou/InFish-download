@@ -22,7 +22,6 @@ from preflight import normalize_url
 VERSION = "0.2.1"
 WORKERS = (
     ("upstream", "https://sph.litao.workers.dev/api/fetch_video_profile"),
-    ("qiaomu", "https://wx-dl.qiaomu.ai/api/fetch_video_profile"),
 )
 MEDIA_HOST_SUFFIXES = ("qq.com", "weixin.qq.com", "gtimg.com", "qpic.cn")
 
@@ -36,7 +35,7 @@ def post_profile(endpoint: str, share_url: str, timeout: float) -> dict[str, Any
     request = urllib.request.Request(
         endpoint,
         data=body,
-        headers={"Content-Type": "application/json", "User-Agent": f"qiaomu-wx-video/{VERSION}"},
+        headers={"Content-Type": "application/json", "User-Agent": f"infish-wx-video/{VERSION}"},
         method="POST",
     )
     try:
@@ -155,11 +154,11 @@ def probe_video(path: Path) -> dict[str, Any]:
 
 
 def download_to_stage(url: str, output_dir: Path, timeout: float) -> tuple[Path, dict[str, Any]]:
-    descriptor, temp_name = tempfile.mkstemp(prefix=".qiaomu-wx-video-", suffix=".part", dir=output_dir)
+    descriptor, temp_name = tempfile.mkstemp(prefix=".infish-wx-video-", suffix=".part", dir=output_dir)
     os.close(descriptor)
     temp_path = Path(temp_name)
     try:
-        request = urllib.request.Request(url, headers={"User-Agent": f"qiaomu-wx-video/{VERSION}"})
+        request = urllib.request.Request(url, headers={"User-Agent": f"infish-wx-video/{VERSION}"})
         with urllib.request.urlopen(request, timeout=timeout) as response, temp_path.open("wb") as output:
             final_url = response.geturl()
             if not validated_media_url(final_url):
@@ -224,7 +223,7 @@ def attempt_worker(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Download a WeChat Channels video through fixed online Workers.")
     parser.add_argument("--url", required=True, help="https://weixin.qq.com/sph/... share URL")
-    parser.add_argument("--output-dir", help="Destination directory; defaults to QIAOMU_WX_VIDEO_OUTPUT or cwd")
+    parser.add_argument("--output-dir", help="Destination directory; defaults to INFISH_WX_VIDEO_OUTPUT or cwd")
     parser.add_argument("--one-version", choices=("h264", "h265", "best"), help="Download only one version")
     parser.add_argument("--resolve-only", action="store_true", help="Resolve metadata without downloading media")
     parser.add_argument("--timeout", type=float, default=60, help="Per-request timeout in seconds")
@@ -235,7 +234,7 @@ def main() -> None:
     except ValueError as exc:
         print(json.dumps({"ok": False, "stage": "validate", "error": str(exc)}, ensure_ascii=False, indent=2))
         raise SystemExit(2)
-    output_dir = Path(args.output_dir or os.environ.get("QIAOMU_WX_VIDEO_OUTPUT", Path.cwd())).expanduser().resolve()
+    output_dir = Path(args.output_dir or os.environ.get("INFISH_WX_VIDEO_OUTPUT", Path.cwd())).expanduser().resolve()
     failures: list[dict[str, str]] = []
     for worker_name, endpoint in WORKERS:
         try:

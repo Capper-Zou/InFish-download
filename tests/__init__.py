@@ -1,1 +1,1 @@
-"""qiaomu-download test package."""
+"""infish-download test package."""

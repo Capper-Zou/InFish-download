@@ -62,7 +62,7 @@ class SkillError(RuntimeError):
 
 
 def require_tool(name: str) -> str:
-    override = os.environ.get(f"QIAOMU_{name.upper().replace('-', '_')}_BIN")
+    override = os.environ.get(f"INFISH_{name.upper().replace('-', '_')}_BIN")
     path = override or shutil.which(name)
     if not path or not Path(path).expanduser().is_file():
         raise SkillError("dependency", f"{name} not found; run doctor for installation guidance")
@@ -256,7 +256,7 @@ def cookie_args(browser: str | None) -> list[str]:
 
 
 def ffmpeg_args() -> list[str]:
-    override = os.environ.get("QIAOMU_FFMPEG_BIN")
+    override = os.environ.get("INFISH_FFMPEG_BIN")
     return ["--ffmpeg-location", str(Path(override).expanduser())] if override else []
 
 
@@ -271,13 +271,13 @@ def version_key(value: str) -> tuple[int, ...]:
 
 def latest_ytdlp_version(timeout: int) -> str:
     request = urllib.request.Request(YT_DLP_RELEASE_API, headers={
-        "Accept": "application/vnd.github+json", "User-Agent": f"qiaomu-download/{VERSION}"})
+        "Accept": "application/vnd.github+json", "User-Agent": f"infish-download/{VERSION}"})
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             latest = str(json.loads(response.read().decode("utf-8")).get("tag_name") or "").lstrip("v")
     except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, json.JSONDecodeError):
         redirect = urllib.request.Request(YT_DLP_RELEASE_LATEST,
-                                          headers={"User-Agent": f"qiaomu-download/{VERSION}"})
+                                          headers={"User-Agent": f"infish-download/{VERSION}"})
         try:
             with urllib.request.urlopen(redirect, timeout=timeout) as response:
                 latest = urllib.parse.unquote(response.geturl().rstrip("/").rsplit("/", 1)[-1]).lstrip("v")
@@ -389,13 +389,13 @@ def output_template(output_dir: Path) -> str:
 
 
 def prepare_output_dir(value: str | None) -> Path:
-    output = Path(value or os.environ.get("QIAOMU_DOWNLOAD_OUTPUT") or Path.home() / "Downloads").expanduser().resolve()
+    output = Path(value or os.environ.get("INFISH_DOWNLOAD_OUTPUT") or Path.home() / "Downloads").expanduser().resolve()
     output.mkdir(parents=True, exist_ok=True)
     return output
 
 
 def lock_path(output_dir: Path, media_id: str, operation: str) -> Path:
-    root = Path(tempfile.gettempdir()) / "qiaomu-download-locks"
+    root = Path(tempfile.gettempdir()) / "infish-download-locks"
     root.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256(f"{output_dir.resolve()}|{media_id}|{operation}".encode()).hexdigest()
     return root / f"{digest}.lock"
