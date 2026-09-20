@@ -6,6 +6,10 @@
 [![License](https://img.shields.io/github/license/Capper-Zou/InFish-download?style=flat-square)](LICENSE)
 [![Powered by yt-dlp](https://img.shields.io/badge/powered%20by-yt--dlp-red?style=flat-square)](https://github.com/yt-dlp/yt-dlp)
 
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="InFish Download：从公开 URL 到经过验证的本地媒体文件">
+</p>
+
 InFish Download 是一个面向 Agent 的通用媒体下载 Skill。它把视频、音频、字幕和媒体信息查询统一到一个入口，并对下载结果执行 `ffprobe` 验证。默认保存到 `~/Downloads`。
 
 ```text
@@ -17,6 +21,10 @@ Agent：下载完成
 时长：8 秒
 验证：ffprobe 通过
 ```
+
+<p align="center">
+  <img src="./assets/readme/workflow.svg" width="100%" alt="InFish Download 工作流：提供 URL、解析站点、下载媒体、验证文件">
+</p>
 
 ## 核心能力
 

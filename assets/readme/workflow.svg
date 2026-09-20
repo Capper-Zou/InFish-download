@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-labelledby="title desc">
+  <title id="title">InFish Download workflow</title>
+  <desc id="desc">Four stages: provide a URL, resolve the platform, download media, and verify the local file.</desc>
+  <rect width="1200" height="240" rx="24" fill="#F4F8F7" stroke="#D7E5E1"/>
+  <path d="M150 82H1050" stroke="#A4C5BE" stroke-width="4" stroke-linecap="round"/>
+  <path d="M375 82l-14-9v18zM675 82l-14-9v18zM975 82l-14-9v18z" fill="#F08B4F"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif">
+    <g text-anchor="middle">
+      <circle cx="150" cy="82" r="36" fill="#0B1220"/>
+      <text x="150" y="90" fill="#7DE2D1" font-size="24" font-weight="700">01</text>
+      <text x="150" y="145" fill="#0B1220" font-size="24" font-weight="750">Provide a URL</text>
+      <text x="150" y="178" fill="#5C6B70" font-size="17">Explicit intent</text>
+    </g>
+    <g text-anchor="middle">
+      <circle cx="450" cy="82" r="36" fill="#0B1220"/>
+      <text x="450" y="90" fill="#7DE2D1" font-size="24" font-weight="700">02</text>
+      <text x="450" y="145" fill="#0B1220" font-size="24" font-weight="750">Resolve the site</text>
+      <text x="450" y="178" fill="#5C6B70" font-size="17">yt-dlp or adapter</text>
+    </g>
+    <g text-anchor="middle">
+      <circle cx="750" cy="82" r="36" fill="#0B1220"/>
+      <text x="750" y="90" fill="#7DE2D1" font-size="24" font-weight="700">03</text>
+      <text x="750" y="145" fill="#0B1220" font-size="24" font-weight="750">Download once</text>
+      <text x="750" y="178" fill="#5C6B70" font-size="17">No playlist or overwrite</text>
+    </g>
+    <g text-anchor="middle">
+      <circle cx="1050" cy="82" r="36" fill="#0B1220"/>
+      <text x="1050" y="90" fill="#FFB86B" font-size="24" font-weight="700">04</text>
+      <text x="1050" y="145" fill="#0B1220" font-size="24" font-weight="750">Verify the file</text>
+      <text x="1050" y="178" fill="#5C6B70" font-size="17">ffprobe before success</text>
+    </g>
+  </g>
+</svg>
